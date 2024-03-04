@@ -48,6 +48,8 @@ pipeline {
             }
         }
 
+    }
+
     post {
         always  {
             sh 'docker logout'
@@ -58,8 +60,6 @@ pipeline {
             // send mail
             echo "SUCCESS"
         }
-    }
-  
     }
 
 }
