@@ -14,6 +14,7 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS=credentials('dockerhub')
         DOCKERHUB_HOST="moritz121"
+        IMAGE_VERSION="${params.version}"
         TAG_NAME=getLastGitTag()
     }
 
@@ -45,6 +46,14 @@ pipeline {
         stage('Docker Build') {
             steps {
                 sh 'docker build -t devops-training-flask-app -f Dockerfile .'
+            }
+        }
+
+        stage('Docker Push') {
+            steps {
+                sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+                sh 'docker tag devops-training-flask-app $DOCKERHUB_HOST/devops-training-flask-app:$IMAGE_VERSION'
+                sh 'docker push $DOCKERHUB_HOST/devops-training-flask-app:$IMAGE_VERSION'
             }
         }
 
