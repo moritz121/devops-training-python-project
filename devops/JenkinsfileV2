@@ -25,7 +25,7 @@ pipeline {
             }
         }
 
-        stage('Docker Build') {
+        stage('Docker Build Tests') {
             steps {
                 sh 'docker build -t devops-training-flask-app-test -f tests.Dockerfile .'
             }
