@@ -12,7 +12,7 @@ pipeline {
         booleanParam(name: 'integrationTest', defaultValue: true, description: 'Test in DEV Environment??')
     }
     environment {
-        DOCKERHUB_CREDENTIALS=credentials('dockerhub-auth')
+        DOCKERHUB_CREDENTIALS=credentials('dockerhub')
         DOCKERHUB_HOST="moritz121"
         TAG_NAME=getLastGitTag()
     }
