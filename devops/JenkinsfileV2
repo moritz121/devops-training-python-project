@@ -57,6 +57,24 @@ pipeline {
             }
         }
 
+        stage('Deploy UAT') {
+            when {
+                branch 'develop'
+            }
+            steps {
+                echo 'Deploying to PRO'
+            }
+        }
+
+        stage('Deploy PRO') {
+            when {
+                branch 'master'
+            }
+            steps {
+                echo 'Deploying to PRO'
+            }
+        }
+
     }
 
     post {
